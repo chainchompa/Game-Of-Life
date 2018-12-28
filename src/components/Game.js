@@ -1,13 +1,9 @@
 import React from 'react';
 import Presets from './Presets';
-import ScrollableAnchor from 'react-scrollable-anchor'
-import { configureAnchors } from 'react-scrollable-anchor'
 import './Game.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlay, faStop, faStepForward, faEraser } from '@fortawesome/free-solid-svg-icons'
-
-configureAnchors({ offset: -150, scrollDuration: 600 })
+import { faPlay, faStop, faStepForward, faEraser, faTimes } from '@fortawesome/free-solid-svg-icons'
 
 class Game extends React.Component {
     constructor(props) {
@@ -20,7 +16,11 @@ class Game extends React.Component {
             gridColor: 'white',
             gridSize: 'small',
             smallGridButton: 'selected',
-            largeGridButton: 'notSelected'
+            largeGridButton: 'notSelected',
+            optionsMenu: false,
+            rulesText: false,
+            aboutText: false,
+            openMenu: false
         };
 
         this.startGame = event => {
@@ -129,6 +129,53 @@ class Game extends React.Component {
             window.clearTimeout(this.timeout);
         };
 
+        this.toggleOptions = () => {
+            if (this.state.optionsMenu === false) {
+                this.setState({ optionsMenu: true,
+                                openMenu: true,
+                                rulesText: false,
+                                aboutText: false
+                })
+            }
+            else {
+                this.setState({ optionsMenu: false,
+                                openMenu: false,
+                                rulesText: false,
+                                aboutText: false
+                })
+            }
+        }
+
+        this.toggleRules = () => {
+            if(this.state.rulesText === false) {
+                this.setState({ rulesText: true,
+                                openMenu: true,
+                                optionsMenu: false,
+                                aboutText: false })
+            }
+            else {
+                this.setState({ rulesText: false,
+                                openMenu: false,
+                                optionsMenu: false,
+                                aboutText: false })
+            }
+        }
+
+        this.toggleAbout = () => {
+            if (this.state.aboutText === false) {
+                this.setState({ aboutText: true,
+                                openMenu: true,
+                                optionsMenu: false,
+                                rulesText: false })
+            }
+            else {
+                this.setState({ aboutText: false,
+                                openMenu: false,
+                                optionsMenu: false,
+                                rulesText: false })
+            }
+        }
+
         this.usePreset = event => {
             if(event.target.value === 'None') {
                 return;
@@ -219,109 +266,125 @@ class Game extends React.Component {
     }
 
     render() {
+        let game;
+        let options;
+        let rules;
+        let about;
+        if(this.state.optionsMenu) {
+            options = <div className="options">
+                <div className="closeButton"><FontAwesomeIcon onClick={this.toggleOptions} icon={faTimes} size="1x" /></div>
+                <h1>Options</h1>
+                <div className="option-settings">
+                    <div className="option-labels">
+                        <p>Size</p>
+                        <p>Pattern</p>
+                        <p>Grid Color</p>
+                        <p>Cell Color</p>
+                    </div>
+                    <div className="option-controls">
+                        <div className="size-options">
+                            <button className={this.state.smallGridButton} onClick={this.handleGridSizeChange} value={'small'}>Small</button>
+                            <button className={this.state.largeGridButton} onClick={this.handleGridSizeChange} value={'large'}>Large</button>
+                        </div>
+                        <div className="dropdowns">
+                            <select value={this.state.value} onChange={this.usePreset}>
+                                <option>None</option>
+                                <option value="random">Random</option>
+                                <option value="glider">Glider</option>
+                                <option value="small exploder">Small Exploder</option>
+                                <option value="exploder">Exploder</option>
+                                <option value="row">Row</option>
+                            </select>
+                            <select value={this.state.value} onChange={this.handleGridColorChange}>
+                                <option style={{ backgroundColor: "white", color: "black" }} value="white">White</option>
+                                <option style={{ backgroundColor: "#0074D9" }} value="#0074D9">Blue</option>
+                                <option style={{ backgroundColor: "#7FDBFF" }} value="#7FDBFF">Aqua</option>
+                                <option style={{ backgroundColor: "#39CCCC" }} value="#39CCCC">Teal</option>
+                                <option style={{ backgroundColor: "#2ECC40" }} value="#2ECC40">Green</option>
+                                <option style={{ backgroundColor: "#FFDC00" }} value="#FFDC00">Yellow</option>
+                                <option style={{ backgroundColor: "#FF851B" }} value="#FF851B">Orange</option>
+                                <option style={{ backgroundColor: "#FF4136" }} value="#FF4136">Red</option>
+                                <option style={{ backgroundColor: "#B10DC9" }} value="#B10DC9">Purple</option>
+                                <option style={{ backgroundColor: "#85144b" }} value="#85144b">Maroon</option>
+                                <option style={{ backgroundColor: "#AAAAAA" }} value="#AAAAAA">Gray</option>
+                            </select>
+                            <select value={this.state.value} onChange={this.handleCellColorChange}>
+                                <option style={{ backgroundColor: "#0074D9" }} value="#0074D9">Blue</option>
+                                <option style={{ backgroundColor: "#7FDBFF" }} value="#7FDBFF">Aqua</option>
+                                <option style={{ backgroundColor: "#39CCCC" }} value="#39CCCC">Teal</option>
+                                <option style={{ backgroundColor: "#2ECC40" }} value="#2ECC40">Green</option>
+                                <option style={{ backgroundColor: "#FFDC00" }} value="#FFDC00">Yellow</option>
+                                <option style={{ backgroundColor: "#FF851B" }} value="#FF851B">Orange</option>
+                                <option style={{ backgroundColor: "#FF4136" }} value="#FF4136">Red</option>
+                                <option style={{ backgroundColor: "#B10DC9" }} value="#B10DC9">Purple</option>
+                                <option style={{ backgroundColor: "#85144b" }} value="#85144b">Maroon</option>
+                                <option style={{ backgroundColor: "#AAAAAA" }} value="#AAAAAA">Gray</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        if(this.state.rulesText) {
+            rules = <div className ="rules">
+                <div className="closeButton"><FontAwesomeIcon onClick={this.toggleRules} icon={faTimes} size="1x" /></div>
+                <h1>Rules</h1>
+                <p>Any live cell with fewer than two live neighbors dies, as if by underpopulation.</p>
+                <p>Any live cell with two or three live neighbors lives on to the next generation.</p>
+                <p>Any live cell with more than three live neighbors dies, as if by overpopulation.</p>
+                <p>Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.</p>
+            </div>
+        }
+        if(this.state.aboutText) {
+            about = <div className="about">
+                <div className="closeButton"><FontAwesomeIcon onClick={this.toggleAbout} icon={faTimes} size="1x" /></div>
+                <h1>About</h1>
+                <p>In late 1940, John von Neumann defined life as a creation (as a being or organism) which can reproduce itself and simulate a Turing machine. Von Neumann was thinking about an engineering solution which would use electromagnetic components floating randomly in liquid or gas. This turned out not to be realistic with the technology available at the time. Thus, ingeniously, Stanisław Ulam invented cellular automata, which were intended to simulate von Neumann's theoretical electromagnetic constructions. Ulam discussed using computers to simulate his cellular automata in a two-dimensional lattice in several papers. In parallel, Von Neumann attempted to construct Ulam's cellular automaton. Although successful, he was busy with other projects and left some details unfinished. His construction was complicated because it tried to simulate his own engineering design.</p>
+            </div>
+        }
+        if(!this.state.openMenu) {
+            game = <div className={`game ${this.state.gridSize}`}>
+                <h1>John Conway's Game of Life</h1>
+                <div className="grid-container" style={{ backgroundColor: this.state.gridColor }}>
+                    {this.state.grid.map((row, rowIndex) => {
+                        return <div key={rowIndex}
+                            className="row">{row.map((cell, cellIndex) => {
+                                if (cell) {
+                                    return <div key={cellIndex}
+                                        className="live-cell"
+                                        style={{ backgroundColor: this.state.cellColor }}
+                                        onClick={!this.state.isRunning ?
+                                            () => this.toggleCell(rowIndex, cellIndex) : null}
+                                    >{cell}</div>;
+                                } else return <div key={cellIndex}
+                                    className="dead-cell"
+                                    style={{ backgroundColor: this.state.gridColor }}
+                                    onClick={!this.state.isRunning ?
+                                        () => this.toggleCell(rowIndex, cellIndex) : null}
+                                >{cell}</div>;
+                            })}</div>;
+                    })}
+                </div>
+                <div className="generation-count">Generation {this.state.iterationCount}</div>
+                <div className="controls">
+                    <FontAwesomeIcon onClick={this.startGame} icon={faPlay} size="2x" />
+                    <FontAwesomeIcon onClick={this.stopGame} icon={faStop} size="2x" />
+                    <FontAwesomeIcon onClick={this.advanceOneStep} icon={faStepForward} size="2x" />
+                    <FontAwesomeIcon onClick={this.clearGrid} icon={faEraser} size="2x" />
+                </div>
+            </div>
+        }
         return (
             <div className="container">
-                <ScrollableAnchor id={'game'}>
-                    <div className={`game ${this.state.gridSize}`}>
-                        <h1>John Conway's Game of Life</h1>
-                        <div className="grid-container" style={{ backgroundColor: this.state.gridColor }}>
-                            {this.state.grid.map((row, rowIndex) => {
-                                return <div key={rowIndex}
-                                    className="row">{row.map((cell, cellIndex) => {
-                                        if (cell) {
-                                            return <div key={cellIndex}
-                                                className="live-cell"
-                                                style={{ backgroundColor: this.state.cellColor }}
-                                                onClick={!this.state.isRunning ?
-                                                    () => this.toggleCell(rowIndex, cellIndex) : null}
-                                            >{cell}</div>;
-                                        } else return <div key={cellIndex}
-                                            className="dead-cell"
-                                            style={{ backgroundColor: this.state.gridColor }}
-                                            onClick={!this.state.isRunning ?
-                                                () => this.toggleCell(rowIndex, cellIndex) : null}
-                                        >{cell}</div>;
-                                    })}</div>;
-                            })}
-                        </div>
-                        <div className="generation-count">Generation {this.state.iterationCount}</div>
-                        <div className="controls">
-                            <FontAwesomeIcon onClick={this.startGame} icon={faPlay} size="2x"/>
-                            <FontAwesomeIcon onClick={this.stopGame} icon={faStop} size="2x"/>
-                            <FontAwesomeIcon onClick={this.advanceOneStep} icon={faStepForward} size="2x"/>
-                            <FontAwesomeIcon onClick={this.clearGrid} icon={faEraser} size="2x"/>
-                        </div>
-                    </div>
-                </ScrollableAnchor>
-                <ScrollableAnchor id={'options'}>
-                    <div className="options">
-                    <h1>Options</h1>
-                        <div className="option-settings">
-                                <div className="option-labels">
-                                    <p>Size</p>
-                                    <p>Pattern</p>
-                                    <p>Grid Color</p>
-                                    <p>Cell Color</p>
-                                </div>
-                                <div className="option-controls">
-                                    <div className="size-options">
-                                        <button className={this.state.smallGridButton} onClick={this.handleGridSizeChange} value={'small'}>small</button>
-                                        <button className={this.state.largeGridButton} onClick={this.handleGridSizeChange} value={'large'}>large</button>
-                                    </div>
-                                    <div className="dropdowns">
-                                        <select value={this.state.value} onChange={this.usePreset}>
-                                        <option>None</option>
-                                        <option value="random">Random</option>
-                                            <option value="glider">Glider</option>
-                                            <option value="small exploder">Small Exploder</option>
-                                            <option value="exploder">Exploder</option>
-                                            <option value="row">Row</option>
-                                        </select>
-                                        <select value={this.state.value} onChange={this.handleGridColorChange}>
-                                            <option style={{ backgroundColor: "white", color: "black" }} value="white">White</option>
-                                            <option style={{ backgroundColor: "#0074D9" }} value="#0074D9">Blue</option>
-                                            <option style={{ backgroundColor: "#7FDBFF" }} value="#7FDBFF">Aqua</option>
-                                            <option style={{ backgroundColor: "#39CCCC" }} value="#39CCCC">Teal</option>
-                                            <option style={{ backgroundColor: "#2ECC40" }} value="#2ECC40">Green</option>
-                                            <option style={{ backgroundColor: "#FFDC00" }} value="#FFDC00">Yellow</option>
-                                            <option style={{ backgroundColor: "#FF851B" }} value="#FF851B">Orange</option>
-                                            <option style={{ backgroundColor: "#FF4136" }} value="#FF4136">Red</option>
-                                            <option style={{ backgroundColor: "#B10DC9" }} value="#B10DC9">Purple</option>
-                                            <option style={{ backgroundColor: "#85144b" }} value="#85144b">Maroon</option>
-                                            <option style={{ backgroundColor: "#AAAAAA" }} value="#AAAAAA">Gray</option>
-                                        </select>
-                                        <select value={this.state.value} onChange={this.handleCellColorChange}>
-                                            <option style={{ backgroundColor: "#0074D9" }} value="#0074D9">Blue</option>
-                                            <option style={{ backgroundColor: "#7FDBFF" }} value="#7FDBFF">Aqua</option>
-                                            <option style={{ backgroundColor: "#39CCCC" }} value="#39CCCC">Teal</option>
-                                            <option style={{ backgroundColor: "#2ECC40" }} value="#2ECC40">Green</option>
-                                            <option style={{ backgroundColor: "#FFDC00" }} value="#FFDC00">Yellow</option>
-                                            <option style={{ backgroundColor: "#FF851B" }} value="#FF851B">Orange</option>
-                                            <option style={{ backgroundColor: "#FF4136" }} value="#FF4136">Red</option>
-                                            <option style={{ backgroundColor: "#B10DC9" }} value="#B10DC9">Purple</option>
-                                            <option style={{ backgroundColor: "#85144b" }} value="#85144b">Maroon</option>
-                                            <option style={{ backgroundColor: "#AAAAAA" }} value="#AAAAAA">Gray</option>
-                                        </select>
-                                    </div>
-                                </div>     
-                    </div>
-                    </div>
-                </ScrollableAnchor>
-                <ScrollableAnchor id={'rules'}>
-                    <div className="rules">
-                        <h1>Rules</h1>
-                        <p>Any live cell with fewer than two live neighbors dies, as if by underpopulation.</p>
-                        <p>Any live cell with two or three live neighbors lives on to the next generation.</p>
-                        <p>Any live cell with more than three live neighbors dies, as if by overpopulation.</p>
-                        <p>Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.</p>
-                    </div>
-                </ScrollableAnchor>
-                <ScrollableAnchor id={'about'}>
-                    <div className="about">
-                        <h1>About</h1>
-                        <p>In late 1940, John von Neumann defined life as a creation (as a being or organism) which can reproduce itself and simulate a Turing machine. Von Neumann was thinking about an engineering solution which would use electromagnetic components floating randomly in liquid or gas. This turned out not to be realistic with the technology available at the time. Thus, ingeniously, Stanisław Ulam invented cellular automata, which were intended to simulate von Neumann's theoretical electromagnetic constructions. Ulam discussed using computers to simulate his cellular automata in a two-dimensional lattice in several papers. In parallel, Von Neumann attempted to construct Ulam's cellular automaton. Although successful, he was busy with other projects and left some details unfinished. His construction was complicated because it tried to simulate his own engineering design.</p>
-                    </div>
-                    </ScrollableAnchor>
+                <div className="info">
+                    <h1 onClick={this.toggleOptions}>Options</h1>
+                    <h1 onClick={this.toggleRules}>Rules</h1>
+                    <h1 onClick={this.toggleAbout}>About</h1>
+                </div>
+                <div>{options}</div>
+                <div>{rules}</div>
+                <div>{about}</div>
+                <div>{game}</div>
             </div>
         );
     }

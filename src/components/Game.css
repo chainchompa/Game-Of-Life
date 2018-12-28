@@ -4,42 +4,56 @@
   flex-direction: column;
   align-items: center;
   color: white;
-  margin-left: 5%;
 }
 
 .container h1 {
   font-family: Tahoma, Geneva, sans-serif;
 }
+
+.container .info {
+  display: flex;
+  font-size: 90%;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.container .info h1 {
+  margin-right: 5%;
+}
+
 .container .game {
   display: flex;
   flex-direction: column;
   align-items: center;
   color: white;
-  padding-top: 2%;
-  margin-bottom: 30%;
+  height: 100%;
 }
 
 .container .small {
-  padding-top: 10%;;
+  padding-top: 8%;
+  margin-top: 15%;
 }
 
- .grid-container {
+.game .grid-container {
   box-sizing: border-box;
   border: 1px solid black;
-  background-color: lightseagreen;
+  margin-bottom: 2%;
 }
- .row {
+
+.game .row {
   width: 100%;
   display: flex;
   flex-direction: row;
   box-sizing: border-box;
 }
- .dead-cell {
+
+.game .dead-cell {
   width: 20px;
   height: 20px;
   border: 1px solid black;
 }
- .live-cell {
+
+.game .live-cell {
   width: 20px;
   height: 20px;
   border: 1px solid black;
@@ -50,25 +64,30 @@
   display: flex;
   width: 100%;
   justify-content: space-around;
-  margin-top: 40px;
+  margin-top: 3%;
 }
 
 .options {
   background: rgba(0, 0, 0, .6);
   border: 3px white solid;
+  margin: auto;
   margin-top: 15%;
-  margin-bottom: 30%;
-  height: 100%;
-  width: 40%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 5%;
 }
 
+.options .closeButton {
+  align-self: flex-end;
+  font-size: 1.4rem;
+}
+
 .options h1 {
   margin-bottom: 10%; 
 }
+
 .options .option-settings {
   display: flex;
   justify-content: space-evenly;
@@ -106,6 +125,7 @@
   background: rgba(0, 0, 0, .8);
   color: white;
 }
+
 .option-controls .size-options .selected button  {
   background-color: pink;
   color: blue;
@@ -150,20 +170,55 @@
 .rules {
   display: flex;
   flex-direction: column;
-  background-color: rgba(0, 0, 0, .6);
+  background: rgba(0, 0, 0, .6);
   border: 3px white solid;
   padding: 3%;
   font-size: 1.4rem;
-  margin-bottom: 30%;
+  margin: auto;
+  margin-top: 10%;
+  margin-bottom: 5%;
+}
+
+.rules .closeButton {
+  align-self: flex-end;
 }
 
 .about {
   display: flex;
   flex-direction: column;
-  width: 50%;
-  background-color: rgba(0, 0, 0, .6);
+  background: rgba(0, 0, 0, .6);
   border: 3px white solid;
   padding: 3%;
   font-size: 1.4rem;
-  margin-bottom: 30%;
+  margin: auto;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  width: 50%;
 }
+
+.about .closeButton {
+  align-self: flex-end;
+}
+
+@media (max-width: 1024px) { 
+  .about {
+    width: 70%;
+  }
+  
+  .rules {
+    width: 70%;
+  }
+ }
+
+ @media (max-width: 600px) { 
+  .options {
+    width: 70%;
+  }
+  .about {
+    width: 85%;
+  }
+
+  .rules {
+    width: 85%;
+  }
+ }
