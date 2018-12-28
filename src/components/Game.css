@@ -111,7 +111,7 @@
   background: rgba(0, 0, 0, 0);
   color: #fff;
   font-family: Sans-serif;
-  font-size: 20px;
+  font-size: 1.8em;
   height: 3%;
   width: 150px;
   line-height: 50px;
@@ -126,23 +126,12 @@
   color: white;
 }
 
-.option-controls .size-options .selected button  {
-  background-color: pink;
-  color: blue;
-  font-family: Sans-serif;
-  font-size: 20px;
-  height: 3%;
-  width: 150px;
-  line-height: 50px;
-  margin: 25px 25px;
-  border: 20px red solid;
-}
-
 .option-controls .dropdowns {
   display: flex;
   flex-direction: column;
   margin-left: 20%;
 }
+
 .option-controls select {
   width: 50%;
   height: 40px;
@@ -153,7 +142,7 @@
   background: transparent;
   border: 1px white solid;
   font-family: Sans-serif;
-  font-size: 20px;
+  font-size: 1.8em;
   width: 150px;
   line-height: 50px;
   margin: 25px 25px;
@@ -161,10 +150,6 @@
 
 .option-controls select option {
   background: rgba(0, 0, 0, 1);
-}
-
-.option-controls select option:hover {
-  color: purple;
 }
 
 .rules {
@@ -212,8 +197,23 @@
 
  @media (max-width: 600px) { 
   .options {
-    width: 70%;
+    width: 100%;
   }
+
+  .options button {
+    background: rgba(0, 0, 0, 0);
+    color: #fff;
+    font-family: Sans-serif;
+    font-size: 1.8em;
+    height: 3%;
+    width: 31%;
+    line-height: 50px;
+    margin: 25px 25px;
+    text-align: center;
+    border: 1px white solid;
+    transition: all 0.3s ease 0s;
+  }
+
   .about {
     width: 85%;
   }
