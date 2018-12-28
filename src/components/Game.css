@@ -198,20 +198,13 @@
  @media (max-width: 600px) { 
   .options {
     width: 100%;
+    margin-left: -5%;
   }
 
   .options button {
-    background: rgba(0, 0, 0, 0);
-    color: #fff;
-    font-family: Sans-serif;
     font-size: 1.8em;
     height: 3%;
     width: 31%;
-    line-height: 50px;
-    margin: 25px 25px;
-    text-align: center;
-    border: 1px white solid;
-    transition: all 0.3s ease 0s;
   }
 
   .about {
