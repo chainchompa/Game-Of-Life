@@ -272,7 +272,7 @@ class Game extends React.Component {
         let about;
         if(this.state.optionsMenu) {
             options = <div className="options">
-                <div className="closeButton"><FontAwesomeIcon onClick={this.toggleOptions} icon={faTimes} size="1x" /></div>
+                <div className="closeButton"><FontAwesomeIcon onClick={this.toggleOptions} icon={faTimes} size="1x" cursor="pointer" /></div>
                 <h1>Options</h1>
                 <div className="option-settings">
                     <div className="option-labels">
@@ -327,7 +327,7 @@ class Game extends React.Component {
         }
         if(this.state.rulesText) {
             rules = <div className ="rules">
-                <div className="closeButton"><FontAwesomeIcon onClick={this.toggleRules} icon={faTimes} size="1x" /></div>
+                <div className="closeButton"><FontAwesomeIcon onClick={this.toggleRules} icon={faTimes} size="1x" cursor="pointer"/></div>
                 <h1>Rules</h1>
                 <p>Any live cell with fewer than two live neighbors dies, as if by underpopulation.</p>
                 <p>Any live cell with two or three live neighbors lives on to the next generation.</p>
@@ -337,7 +337,7 @@ class Game extends React.Component {
         }
         if(this.state.aboutText) {
             about = <div className="about">
-                <div className="closeButton"><FontAwesomeIcon onClick={this.toggleAbout} icon={faTimes} size="1x" /></div>
+                <div className="closeButton"><FontAwesomeIcon onClick={this.toggleAbout} icon={faTimes} size="1x" cursor="pointer"/></div>
                 <h1>About</h1>
                 <p>In late 1940, John von Neumann defined life as a creation (as a being or organism) which can reproduce itself and simulate a Turing machine. Von Neumann was thinking about an engineering solution which would use electromagnetic components floating randomly in liquid or gas. This turned out not to be realistic with the technology available at the time. Thus, ingeniously, Stanisław Ulam invented cellular automata, which were intended to simulate von Neumann's theoretical electromagnetic constructions. Ulam discussed using computers to simulate his cellular automata in a two-dimensional lattice in several papers. In parallel, Von Neumann attempted to construct Ulam's cellular automaton. Although successful, he was busy with other projects and left some details unfinished. His construction was complicated because it tried to simulate his own engineering design.</p>
             </div>
@@ -367,10 +367,10 @@ class Game extends React.Component {
                 </div>
                 <div className="generation-count">Generation {this.state.iterationCount}</div>
                 <div className="controls">
-                    <FontAwesomeIcon onClick={this.startGame} icon={faPlay} size="2x" />
-                    <FontAwesomeIcon onClick={this.stopGame} icon={faStop} size="2x" />
-                    <FontAwesomeIcon onClick={this.advanceOneStep} icon={faStepForward} size="2x" />
-                    <FontAwesomeIcon onClick={this.clearGrid} icon={faEraser} size="2x" />
+                    <FontAwesomeIcon onClick={this.startGame} icon={faPlay} size="2x" cursor="pointer" />
+                    <FontAwesomeIcon onClick={this.stopGame} icon={faStop} size="2x" cursor="pointer" />
+                    <FontAwesomeIcon onClick={this.advanceOneStep} icon={faStepForward} size="2x" cursor="pointer" />
+                    <FontAwesomeIcon onClick={this.clearGrid} icon={faEraser} size="2x" cursor="pointer" />
                 </div>
             </div>
         }
