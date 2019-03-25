@@ -129,23 +129,6 @@ class Game extends React.Component {
             window.clearTimeout(this.timeout);
         };
 
-        this.toggleOptions = () => {
-            if (this.state.optionsMenu === false) {
-                this.setState({ optionsMenu: true,
-                                openMenu: true,
-                                rulesText: false,
-                                aboutText: false
-                })
-            }
-            else {
-                this.setState({ optionsMenu: false,
-                                openMenu: false,
-                                rulesText: false,
-                                aboutText: false
-                })
-            }
-        }
-
         this.toggleRules = () => {
             if(this.state.rulesText === false) {
                 this.setState({ rulesText: true,
@@ -270,61 +253,6 @@ class Game extends React.Component {
         let options;
         let rules;
         let about;
-        if(this.state.optionsMenu) {
-            options = <div className="options">
-                <div className="closeButton"><FontAwesomeIcon onClick={this.toggleOptions} icon={faTimes} size="1x" cursor="pointer" /></div>
-                <h1>Options</h1>
-                <div className="option-settings">
-                    <div className="option-labels">
-                        <p>Size</p>
-                        <p>Pattern</p>
-                        <p>Grid Color</p>
-                        <p>Cell Color</p>
-                    </div>
-                    <div className="option-controls">
-                        <div className="size-options">
-                            <button className={this.state.smallGridButton} onClick={this.handleGridSizeChange} value={'small'}>Small</button>
-                            <button className={this.state.largeGridButton} onClick={this.handleGridSizeChange} value={'large'}>Large</button>
-                        </div>
-                        <div className="dropdowns">
-                            <select value={this.state.value} onChange={this.usePreset}>
-                                <option>None</option>
-                                <option value="random">Random</option>
-                                <option value="glider">Glider</option>
-                                <option value="small exploder">Small Exploder</option>
-                                <option value="exploder">Exploder</option>
-                                <option value="row">Row</option>
-                            </select>
-                            <select value={this.state.value} onChange={this.handleGridColorChange}>
-                                <option style={{ backgroundColor: "white", color: "black" }} value="white">White</option>
-                                <option style={{ backgroundColor: "#0074D9" }} value="#0074D9">Blue</option>
-                                <option style={{ backgroundColor: "#7FDBFF" }} value="#7FDBFF">Aqua</option>
-                                <option style={{ backgroundColor: "#39CCCC" }} value="#39CCCC">Teal</option>
-                                <option style={{ backgroundColor: "#2ECC40" }} value="#2ECC40">Green</option>
-                                <option style={{ backgroundColor: "#FFDC00" }} value="#FFDC00">Yellow</option>
-                                <option style={{ backgroundColor: "#FF851B" }} value="#FF851B">Orange</option>
-                                <option style={{ backgroundColor: "#FF4136" }} value="#FF4136">Red</option>
-                                <option style={{ backgroundColor: "#B10DC9" }} value="#B10DC9">Purple</option>
-                                <option style={{ backgroundColor: "#85144b" }} value="#85144b">Maroon</option>
-                                <option style={{ backgroundColor: "#AAAAAA" }} value="#AAAAAA">Gray</option>
-                            </select>
-                            <select value={this.state.value} onChange={this.handleCellColorChange}>
-                                <option style={{ backgroundColor: "#0074D9" }} value="#0074D9">Blue</option>
-                                <option style={{ backgroundColor: "#7FDBFF" }} value="#7FDBFF">Aqua</option>
-                                <option style={{ backgroundColor: "#39CCCC" }} value="#39CCCC">Teal</option>
-                                <option style={{ backgroundColor: "#2ECC40" }} value="#2ECC40">Green</option>
-                                <option style={{ backgroundColor: "#FFDC00" }} value="#FFDC00">Yellow</option>
-                                <option style={{ backgroundColor: "#FF851B" }} value="#FF851B">Orange</option>
-                                <option style={{ backgroundColor: "#FF4136" }} value="#FF4136">Red</option>
-                                <option style={{ backgroundColor: "#B10DC9" }} value="#B10DC9">Purple</option>
-                                <option style={{ backgroundColor: "#85144b" }} value="#85144b">Maroon</option>
-                                <option style={{ backgroundColor: "#AAAAAA" }} value="#AAAAAA">Gray</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        }
         if(this.state.rulesText) {
             rules = <div className ="rules">
                 <div className="closeButton"><FontAwesomeIcon onClick={this.toggleRules} icon={faTimes} size="1x" cursor="pointer"/></div>
@@ -372,16 +300,67 @@ class Game extends React.Component {
                     <FontAwesomeIcon onClick={this.advanceOneStep} icon={faStepForward} size="2x" cursor="pointer" />
                     <FontAwesomeIcon onClick={this.clearGrid} icon={faEraser} size="2x" cursor="pointer" />
                 </div>
+                <div className="options">
+                    <div className="option-settings">
+                        <div className="option-controls">
+                          <div className="top-options">
+                            <div className="size-options">
+                                <p>Size</p>
+                                <button className={this.state.smallGridButton} onClick={this.handleGridSizeChange} value={'small'}>Small</button>
+                                <button className={this.state.largeGridButton} onClick={this.handleGridSizeChange} value={'large'}>Large</button>
+                            </div>
+                              <div className="pattern-options">
+                                <p>Pattern</p>
+                                  <select value={this.state.value} onChange={this.usePreset}>
+                                      <option>None</option>
+                                      <option value="random">Random</option>
+                                      <option value="glider">Glider</option>
+                                      <option value="small exploder">Small Exploder</option>
+                                      <option value="exploder">Exploder</option>
+                                      <option value="row">Row</option>
+                                  </select>
+                              </div>
+                            </div>
+                              <div className="bottom-options">
+                                <p>Grid Color</p>
+                                <select value={this.state.value} onChange={this.handleGridColorChange}>
+                                    <option style={{ backgroundColor: "white", color: "black" }} value="white">White</option>
+                                    <option style={{ backgroundColor: "#0074D9" }} value="#0074D9">Blue</option>
+                                    <option style={{ backgroundColor: "#7FDBFF" }} value="#7FDBFF">Aqua</option>
+                                    <option style={{ backgroundColor: "#39CCCC" }} value="#39CCCC">Teal</option>
+                                    <option style={{ backgroundColor: "#2ECC40" }} value="#2ECC40">Green</option>
+                                    <option style={{ backgroundColor: "#FFDC00" }} value="#FFDC00">Yellow</option>
+                                    <option style={{ backgroundColor: "#FF851B" }} value="#FF851B">Orange</option>
+                                    <option style={{ backgroundColor: "#FF4136" }} value="#FF4136">Red</option>
+                                    <option style={{ backgroundColor: "#B10DC9" }} value="#B10DC9">Purple</option>
+                                    <option style={{ backgroundColor: "#85144b" }} value="#85144b">Maroon</option>
+                                    <option style={{ backgroundColor: "#AAAAAA" }} value="#AAAAAA">Gray</option>
+                                </select>
+                                <p>Cell Color</p>
+                                <select value={this.state.value} onChange={this.handleCellColorChange}>
+                                    <option style={{ backgroundColor: "#0074D9" }} value="#0074D9">Blue</option>
+                                    <option style={{ backgroundColor: "#7FDBFF" }} value="#7FDBFF">Aqua</option>
+                                    <option style={{ backgroundColor: "#39CCCC" }} value="#39CCCC">Teal</option>
+                                    <option style={{ backgroundColor: "#2ECC40" }} value="#2ECC40">Green</option>
+                                    <option style={{ backgroundColor: "#FFDC00" }} value="#FFDC00">Yellow</option>
+                                    <option style={{ backgroundColor: "#FF851B" }} value="#FF851B">Orange</option>
+                                    <option style={{ backgroundColor: "#FF4136" }} value="#FF4136">Red</option>
+                                    <option style={{ backgroundColor: "#B10DC9" }} value="#B10DC9">Purple</option>
+                                    <option style={{ backgroundColor: "#85144b" }} value="#85144b">Maroon</option>
+                                    <option style={{ backgroundColor: "#AAAAAA" }} value="#AAAAAA">Gray</option>
+                                </select>
+                              </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         }
         return (
             <div className="container">
                 <div className="info">
-                    <h1 onClick={this.toggleOptions}>Options</h1>
                     <h1 onClick={this.toggleRules}>Rules</h1>
                     <h1 onClick={this.toggleAbout}>About</h1>
                 </div>
-                <div>{options}</div>
                 <div>{rules}</div>
                 <div>{about}</div>
                 <div>{game}</div>
