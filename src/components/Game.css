@@ -32,7 +32,6 @@
   border: 2px white solid;
   width: 800px;
   margin-bottom: 5%;
-
 }
 
 .container .small {
@@ -168,6 +167,16 @@
   font-size: 22px;
 }
 
+.option-controls .bottom-options .grid-color {
+  display: flex;
+  align-items: center;
+}
+
+.option-controls .bottom-options .cell-color {
+  display: flex;
+  align-items: center;
+}
+
 .option-controls select {
   width: 50%;
   height: 40px;
@@ -227,25 +236,55 @@
   .rules {
     width: 70%;
   }
- }
+}
+
+@media (max-width: 850px) {
+  .container .game {
+    width: 600px;
+    margin: auto;
+    margin-bottom: 10%;
+  }
+
+  .options .option-controls .top-options {
+    flex-direction: column;
+  }
+
+  .options .option-controls .size-options {
+    display: none;
+  }
+  .options .option-controls .pattern-options {
+    justify-content: center;
+  }
+
+  .options .option-controls .bottom-options {
+    flex-direction: column;
+  }
+}
 
  @media (max-width: 600px) {
-  .options {
+  .container .game {
+     width: 100%;
+     border: none;
+     background: none;
+     margin-top: -40px;
+   }
+
+  .container .game .options {
     width: 100%;
     margin-left: -5%;
   }
 
-  .options button {
-    font-size: 1.8em;
-    height: 3%;
-    width: 31%;
+  .options .option-controls .pattern-options select {
+    margin-left: 16%;
   }
 
   .about {
     width: 85%;
+    margin-top: 0;
   }
 
   .rules {
     width: 85%;
+    margin-top: 0;
   }
  }

@@ -322,20 +322,23 @@ class Game extends React.Component {
                               </div>
                             </div>
                               <div className="bottom-options">
-                                <p>Grid Color</p>
-                                <select value={this.state.value} onChange={this.handleGridColorChange}>
-                                    <option style={{ backgroundColor: "white", color: "black" }} value="white">White</option>
-                                    <option style={{ backgroundColor: "#0074D9" }} value="#0074D9">Blue</option>
-                                    <option style={{ backgroundColor: "#7FDBFF" }} value="#7FDBFF">Aqua</option>
-                                    <option style={{ backgroundColor: "#39CCCC" }} value="#39CCCC">Teal</option>
-                                    <option style={{ backgroundColor: "#2ECC40" }} value="#2ECC40">Green</option>
-                                    <option style={{ backgroundColor: "#FFDC00" }} value="#FFDC00">Yellow</option>
-                                    <option style={{ backgroundColor: "#FF851B" }} value="#FF851B">Orange</option>
-                                    <option style={{ backgroundColor: "#FF4136" }} value="#FF4136">Red</option>
-                                    <option style={{ backgroundColor: "#B10DC9" }} value="#B10DC9">Purple</option>
-                                    <option style={{ backgroundColor: "#85144b" }} value="#85144b">Maroon</option>
-                                    <option style={{ backgroundColor: "#AAAAAA" }} value="#AAAAAA">Gray</option>
-                                </select>
+                                <div className="grid-color">
+                                  <p>Grid Color</p>
+                                  <select value={this.state.value} onChange={this.handleGridColorChange}>
+                                      <option style={{ backgroundColor: "white", color: "black" }} value="white">White</option>
+                                      <option style={{ backgroundColor: "#0074D9" }} value="#0074D9">Blue</option>
+                                      <option style={{ backgroundColor: "#7FDBFF" }} value="#7FDBFF">Aqua</option>
+                                      <option style={{ backgroundColor: "#39CCCC" }} value="#39CCCC">Teal</option>
+                                      <option style={{ backgroundColor: "#2ECC40" }} value="#2ECC40">Green</option>
+                                      <option style={{ backgroundColor: "#FFDC00" }} value="#FFDC00">Yellow</option>
+                                      <option style={{ backgroundColor: "#FF851B" }} value="#FF851B">Orange</option>
+                                      <option style={{ backgroundColor: "#FF4136" }} value="#FF4136">Red</option>
+                                      <option style={{ backgroundColor: "#B10DC9" }} value="#B10DC9">Purple</option>
+                                      <option style={{ backgroundColor: "#85144b" }} value="#85144b">Maroon</option>
+                                      <option style={{ backgroundColor: "#AAAAAA" }} value="#AAAAAA">Gray</option>
+                                  </select>
+                                </div>
+                                <div className="cell-color">
                                 <p>Cell Color</p>
                                 <select value={this.state.value} onChange={this.handleCellColorChange}>
                                     <option style={{ backgroundColor: "#0074D9" }} value="#0074D9">Blue</option>
@@ -350,6 +353,7 @@ class Game extends React.Component {
                                     <option style={{ backgroundColor: "#AAAAAA" }} value="#AAAAAA">Gray</option>
                                 </select>
                               </div>
+                            </div>
                         </div>
                     </div>
                 </div>
