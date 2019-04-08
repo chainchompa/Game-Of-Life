@@ -23,15 +23,6 @@ class Game extends React.Component {
             openMenu: false
         };
 
-        this.startGame = event => {
-            event.preventDefault();
-            if (this.state.isRunning) {
-                return;
-            }
-            this.setState({ isRunning: true });
-            this.continueGame();
-        };
-
         this.handleGame = event => {
           event.preventDefault();
           if (!this.state.isRunning) {
@@ -43,15 +34,6 @@ class Game extends React.Component {
             this.setState({ isRunning: false});
           }
         }
-
-        this.stopGame = event => {
-            event.preventDefault();
-            if (!this.state.isRunning) {
-                return;
-            }
-            window.clearTimeout(this.timeout);
-            this.setState({ isRunning: false });
-        };
 
         this.continueGame = () => {
                 let grid = this.state.grid.map(row => row.slice());
