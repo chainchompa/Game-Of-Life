@@ -32,6 +32,18 @@ class Game extends React.Component {
             this.continueGame();
         };
 
+        this.handleGame = event => {
+          event.preventDefault();
+          if (!this.state.isRunning) {
+            this.setState({ isRunning: true });
+            this.continueGame();
+          }
+          if (this.state.isRunning) {
+            window.clearTimeout(this.timeout);
+            this.setState({ isRunning: false});
+          }
+        }
+
         this.stopGame = event => {
             event.preventDefault();
             if (!this.state.isRunning) {
@@ -253,6 +265,14 @@ class Game extends React.Component {
         let options;
         let rules;
         let about;
+        let playButton;
+
+        if (!this.state.isRunning) {
+          playButton = <FontAwesomeIcon onClick={this.handleGame} icon={faPlay} size="2x" cursor="pointer" />
+        } else {
+          playButton = <FontAwesomeIcon onClick={this.handleGame} icon={faStop} size="2x" cursor="pointer" />
+        }
+
         if(this.state.rulesText) {
             rules = <div className ="rules">
                 <div className="closeButton"><FontAwesomeIcon onClick={this.toggleRules} icon={faTimes} size="1x" cursor="pointer"/></div>
@@ -295,8 +315,7 @@ class Game extends React.Component {
                 </div>
                 <div className="generation-count">Generation {this.state.iterationCount}</div>
                 <div className="controls">
-                    <FontAwesomeIcon onClick={this.startGame} icon={faPlay} size="2x" cursor="pointer" />
-                    <FontAwesomeIcon onClick={this.stopGame} icon={faStop} size="2x" cursor="pointer" />
+                    {playButton}
                     <FontAwesomeIcon onClick={this.advanceOneStep} icon={faStepForward} size="2x" cursor="pointer" />
                     <FontAwesomeIcon onClick={this.clearGrid} icon={faEraser} size="2x" cursor="pointer" />
                 </div>
